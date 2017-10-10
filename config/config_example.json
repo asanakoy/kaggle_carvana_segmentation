@@ -1,0 +1,6 @@
+{
+  "root_dir": "~/workspace/cars",
+  "input_data_dir": "~/workspace/cars/input/",
+  "submissions_dir": "~/workspace/cars/submissions/",
+  "models_dir": "~/workspace/cars/scripts/runs"
+}
