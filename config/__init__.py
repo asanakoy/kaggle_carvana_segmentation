@@ -11,4 +11,9 @@ with open(join(cwd, 'config.json')) as json_file:
 for key in config.keys():
     config[key] = expnd(config[key])
 
+root_dir = None
+input_data_dir = None
+submissions_dir = None
+models_dir = None
+
 vars().update(config)

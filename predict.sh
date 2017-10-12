@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # This script will run predict on test for all the networks and assemble a final submission file.
 
-bash asanakoy/predict_scratch.sh
-bash asanakoy/predict_vgg11v1.sh
+export PYTHONPATH=$(pwd):$PYTHONPATH
+
+pushd asanakoy
+bash predict_scratch.sh
+bash predict_vgg11v1.sh
+popd
 
 # TODO: albu, ternaus
 
