@@ -35,7 +35,7 @@ To train all the necessary networks:
 - Run `bash train.sh`
 
 After training finishes trained weights are saved in `model_dir` directory and can be used by prediction scripts. 
-Or you can directly used downloaded weights to generate predictions.
+Or you can directly use downloaded weights and skip the training procedure.
 
 **Required time:** *It may require quite a long time depending on hardware used. Takes about 30-60 min per epoch depending on the network on a single Titan X Pascal GPU. Total time needed is about 2140 hours, which is ~90 days on a single Titan X Pascal. The required time can be reduced if you use more GPUs in parallel.*
 
