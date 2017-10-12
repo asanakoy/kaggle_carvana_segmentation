@@ -11,9 +11,9 @@ from joblib import delayed
 from sklearn.utils import gen_even_slices
 
 import config
-from data_utils import rle_encode
-from data_utils import rle_to_string
-from dataset import CARVANA
+from asanakoy.data_utils import rle_encode
+from asanakoy.data_utils import rle_to_string
+from asanakoy.dataset import CARVANA
 
 
 def load_from_files(test_image_paths, output_dir=None, is_quiet=False):
@@ -41,7 +41,6 @@ def average_from_files(test_image_paths, probs_dirs, output_dir, should_save_mas
         if not dir_path.exists():
             raise ValueError('{} not found'.format(dir_path))
     output_dir.mkdir(exist_ok=True)
-    print 'Number of samples:', len(test_image_paths)
 
     all_rles = []
     all_img_filenames = []
@@ -101,7 +100,7 @@ def main():
 
     probs_dirs = [
         ('test_scratch2', 1.0),
-        ('test_vgg11v1_7folds_final', 1.0),
+        ('test_vgg11v1_final', 1.0),
         ('albu/albu_sep27', 1.0),
         ('ternaus/ternaus_sep27', 1.0),
     ]

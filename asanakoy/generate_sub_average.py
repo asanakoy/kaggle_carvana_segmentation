@@ -42,7 +42,6 @@ def average_from_files(test_image_paths, probs_dirs, output_dir, should_save_mas
             raise ValueError('{} not found'.format(dir_path))
     if should_save_masks:
         output_dir.mkdir(exist_ok=True)
-    print 'Number of samples:', len(test_image_paths)
 
     all_rles = []
     all_img_filenames = []
@@ -93,6 +92,7 @@ def main():
                         help='load pregenerated probs from folder?')
     parser.add_argument('--net_name', choices=['scratch', 'vgg11v1'])
     args = parser.parse_args()
+    print 'config.submissions_dir', config.submissions_dir
 
     if args.net_name == 'vgg11v1':
         probs_dirs = list()
@@ -118,6 +118,7 @@ def main():
     else:
         raise ValueError('Unknown net_name {}'.format(args.net_name))
 
+    probs_dirs = map(Path, probs_dirs)
     with open(str(output_dir) + '.txt', mode='w') as f:
         f.write('Following models were averaged:\n')
         for l in probs_dirs:
