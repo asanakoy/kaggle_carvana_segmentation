@@ -42,7 +42,7 @@ def eval_config(config_path):
 
     num_workers = 0 if os.name == 'nt' else 3
     root = config.dataset_path
-    image_folder_name = 'train' if not test else 'test'
+    image_folder_name = 'train_hq' if not test else 'test_hq'
     c_ds = CarvanaDataset(root, config.img_rows, config.img_cols, image_folder_name=image_folder_name, apply_clahe=config.use_clahe)
     ds = H5LikeFileInterface(c_ds)
     if not test:
