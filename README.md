@@ -14,6 +14,7 @@ To train final models you will need the following:
     - Powerful GPU: Nvidia Titan X (12Gb VRAM) or Nvidia GeForce GTX 1080 Ti. The more the better.
 
 ### Main software for training neural networks
+- Cuda 8.0
 - Python 2.7 and Python 3.5
 - Pytorch 0.2.0
 
