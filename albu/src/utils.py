@@ -38,8 +38,9 @@ def get_config(config_path):
     with open(config_path, 'r') as f:
         config = json.load(f)
         config['fold'] = None
-    with open(os.path.join('..', 'config', 'config.json'), 'r') as f:
+    with open(os.path.join('..', '..', 'config', 'config.json'), 'r') as f:
         second_config = json.load(f)
     config['dataset_path'] = second_config['input_data_dir']
+    config['models_dir'] = second_config['models_dir']
     print(config)
     return Config(**config)

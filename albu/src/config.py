@@ -2,6 +2,7 @@ from collections import namedtuple
 
 Config = namedtuple("Config", [
     "dataset_path",
+    "models_dir",
     "folder",
     "img_rows",
     "img_cols",

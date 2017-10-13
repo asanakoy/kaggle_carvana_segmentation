@@ -37,7 +37,7 @@ class CarvanaEval(FullImageEvaluator):
         cv2.imwrite(os.path.join('..', 'results', self.config.folder, "{}{}.png".format(prefix, name)), (self.full_pred[:1280, :1918] * 255).astype(np.uint8))
 
 def eval_config(config_path):
-    test = False
+    test = True
     config = get_config(config_path)
 
     num_workers = 0 if os.name == 'nt' else 3

@@ -45,8 +45,8 @@ def predict(model, batch, flips=flip.FLIP_NONE):
     return to_numpy(pred1)
 
 
-def read_model(project, fold):
-    model = nn.DataParallel(torch.load(os.path.join('..', 'weights', project, 'fold{}_best.pth'.format(fold))).module)
+def read_model(weights_path, project, fold):
+    model = nn.DataParallel(torch.load(os.path.join(weights_path, project, 'fold{}_best.pth'.format(fold))).module)
     model.eval()
     return model
 
@@ -113,7 +113,8 @@ class Evaluator:
             ds_cls = ValDataset if not self.test else SequentialDataset
             val_dataset = ds_cls(self.ds, val_index, stage='test', config=self.config)
             val_dl = PytorchDataLoader(val_dataset, batch_size=self.config.predict_batch_size, num_workers=self.num_workers, drop_last=False)
-            model = read_model(self.folder, fold)
+            weights_path = os.path.join(self.config.models_dir, 'albu')
+            model = read_model(weights_path, self.folder, fold)
             pbar = val_dl if self.config.dbg else tqdm.tqdm(val_dl, total=len(val_dl))
             for data in pbar:
                 self.show_mask = 'mask' in data and self.show_mask
