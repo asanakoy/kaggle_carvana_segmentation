@@ -133,7 +133,7 @@ def main():
     probs_dirs = [
         ('test_scratch2', 1.0),
         ('test_vgg11v1_final', 1.0),
-        ('albu/results/albu27.09', 1.0),
+        ('albu27.09', 1.0),
         ('ternaus/ternaus_sep27', 1.0),
     ]
     w_sum = sum([x[1] for x in probs_dirs])
