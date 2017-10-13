@@ -31,14 +31,19 @@ def check_if_top_is_unreliable(mean_pred, albu_pred):
     rows, cols = unreliable.shape
     unreliable[(albu_pred > 30) & (albu_pred < 210)] = 255
     unreliable = cv2.erode(unreliable, (55, 55), iterations=10)
-    unreliable = unreliable[0:rows//2, ...]
+    unreliable = unreliable[0:rows // 2, ...]
     biggest = biggest_contour(unreliable)
+    if biggest is None:
+        return None
     if cv2.contourArea(biggest) > 40000:
-        result = (mean_pred > 127).astype(np.uint8) * 255
         x, y, w, h = cv2.boundingRect(biggest)
-        x, y, w, h = max(x - 5, 0), y - 5, w + 10, h + 10
-        mask = (albu_pred > 7).astype(np.uint8) * 255
-        result[y:y+h, x:x+w] = mask[y:y+h, x:x+w]
+        x, y, w, h = max(x - 50, 0), y - 50, w + 100, h + 100
+        mask = (albu_pred > 55).astype(np.uint8) * 255
+        c = biggest_contour(mask[y:y + h, x:x + w])
+        c = cv2.convexHull(c)
+        mask[y:y + h, x:x + w] = cv2.drawContours(mask[y:y + h, x:x + w], [c], -1, 255, -1)
+        result = (mean_pred > 127).astype(np.uint8) * 255
+        result[y:y + h, x:x + w] = mask[y:y + h, x:x + w]
         return result
     return None
 
@@ -80,7 +85,7 @@ def average_from_files(test_image_paths, probs_dirs, output_dir, should_save_mas
             assert 0 <= weight <= 1.0, weight
             mask_img = cv2.imread(str(dir_path.joinpath(sample_name + '.png')),
                                   cv2.IMREAD_GRAYSCALE)
-            if 'albu' in dir_path:
+            if 'albu' in str(dir_path):
                 albu_prediction = np.copy(mask_img)
             assert mask_img is not None, sample_name
             mask_img = mask_img.astype(np.float32)
@@ -134,7 +139,7 @@ def main():
         ('test_scratch2', 1.0),
         ('test_vgg11v1_final', 1.0),
         ('albu27.09', 1.0),
-        ('ternaus/ternaus_sep27', 1.0),
+        ('ternaus27', 1.0),
     ]
     w_sum = sum([x[1] for x in probs_dirs])
     print 'W_sum=', w_sum
