@@ -16,6 +16,33 @@ from asanakoy.data_utils import rle_to_string
 from asanakoy.dataset import CARVANA
 
 
+def biggest_contour(im):
+    im2, contours, hierarchy = cv2.findContours(np.copy(im), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    biggest, maxarea = None, 0
+    for cnt in contours:
+        a = cv2.contourArea(cnt)
+        if a > maxarea:
+            biggest, maxarea = cnt, a
+    return biggest
+
+
+def check_if_top_is_unreliable(mean_pred, albu_pred):
+    unreliable = np.zeros_like(albu_pred)
+    rows, cols = unreliable.shape
+    unreliable[(albu_pred > 30) & (albu_pred < 210)] = 255
+    unreliable = cv2.erode(unreliable, (55, 55), iterations=10)
+    unreliable = unreliable[0:rows//2, ...]
+    biggest = biggest_contour(unreliable)
+    if cv2.contourArea(biggest) > 40000:
+        result = (mean_pred > 127).astype(np.uint8) * 255
+        x, y, w, h = cv2.boundingRect(biggest)
+        x, y, w, h = max(x - 5, 0), y - 5, w + 10, h + 10
+        mask = (albu_pred > 7).astype(np.uint8) * 255
+        result[y:y+h, x:x+w] = mask[y:y+h, x:x+w]
+        return result
+    return None
+
+
 def load_from_files(test_image_paths, output_dir=None, is_quiet=False):
     all_rles = []
     all_img_filenames = []
@@ -45,14 +72,16 @@ def average_from_files(test_image_paths, probs_dirs, output_dir, should_save_mas
     all_rles = []
     all_img_filenames = []
     for sample_name in tqdm(test_image_paths, desc='Avg files', disable=is_quiet):
+        albu_prediction = None
         sample_name = Path(sample_name).stem
 
-        # TODO: use albu's ensemble for van
         probs = None
         for dir_path, weight in probs_dirs:
             assert 0 <= weight <= 1.0, weight
             mask_img = cv2.imread(str(dir_path.joinpath(sample_name + '.png')),
                                   cv2.IMREAD_GRAYSCALE)
+            if 'albu' in dir_path:
+                albu_prediction = np.copy(mask_img)
             assert mask_img is not None, sample_name
             mask_img = mask_img.astype(np.float32)
 
@@ -62,9 +91,12 @@ def average_from_files(test_image_paths, probs_dirs, output_dir, should_save_mas
                 probs += mask_img * weight
         assert probs.max() <= 256, probs.max()
         probs = np.clip(probs, 0, 255)
-
-        # save to disk
         prob_img = np.asarray(np.round(probs), dtype=np.uint8)
+
+        fixed_top = check_if_top_is_unreliable(probs, albu_prediction)
+        if fixed_top is not None:
+            prob_img = fixed_top
+
         if should_save_masks:
             cv2.imwrite(str(output_dir.joinpath(sample_name + '.png')), prob_img)
 
@@ -101,7 +133,7 @@ def main():
     probs_dirs = [
         ('test_scratch2', 1.0),
         ('test_vgg11v1_final', 1.0),
-        ('albu/albu_sep27', 1.0),
+        ('albu/results/albu27.09', 1.0),
         ('ternaus/ternaus_sep27', 1.0),
     ]
     w_sum = sum([x[1] for x in probs_dirs])
