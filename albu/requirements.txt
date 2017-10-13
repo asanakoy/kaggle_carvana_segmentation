@@ -1,5 +1,4 @@
 numpy
-torchvision
 opencv-python
 pandas
 tqdm

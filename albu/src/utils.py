@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from .config import Config
+from config import Config
 import os
 import argparse
 import json
