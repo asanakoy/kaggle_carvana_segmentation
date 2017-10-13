@@ -157,7 +157,7 @@ class PytorchTrain:
         return ret
 
     def fit(self, train_loader, val_loader):
-        save_path = os.path.join('..', 'weights', self.config.folder)
+        save_path = os.path.join(self.config.models_dir, 'albu', self.config.folder)
         os.makedirs(save_path, exist_ok=True)
         best_epoch = -1
         best_loss = float('inf')
