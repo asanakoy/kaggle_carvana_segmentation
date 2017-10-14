@@ -101,6 +101,7 @@ def average_from_files(test_image_paths, probs_dirs, output_dir, should_save_mas
         fixed_top = check_if_top_is_unreliable(probs, albu_prediction)
         if fixed_top is not None:
             prob_img = fixed_top
+            probs = fixed_top
 
         if should_save_masks:
             cv2.imwrite(str(output_dir.joinpath(sample_name + '.png')), prob_img)
