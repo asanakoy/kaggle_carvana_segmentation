@@ -11,10 +11,6 @@ def heatmap(map):
     return cv2.applyColorMap(map, cv2.COLORMAP_BONE)
 
 
-def get_npy_folds(path):
-    return list(zip(*np.load(path)))
-
-
 def get_csv_folds(path, d):
     df = pd.read_csv(path)
     df = df[['id', 'fold']]

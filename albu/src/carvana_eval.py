@@ -2,7 +2,7 @@ import os
 
 import cv2
 import numpy as np
-from utils import get_config, get_csv_folds, get_npy_folds
+from utils import get_config, get_csv_folds
 from dataset.h5like_interface import H5LikeFileInterface
 from eval import Evaluator, flip
 
@@ -46,10 +46,8 @@ def eval_config(config_path):
     c_ds = CarvanaDataset(root, config.img_rows, config.img_cols, image_folder_name=image_folder_name, apply_clahe=config.use_clahe)
     ds = H5LikeFileInterface(c_ds)
     if not test:
-        if 'f04a' in config.folder:
-            folds = get_csv_folds(os.path.join(root, 'folds_csv.csv'), os.listdir(os.path.join(root, image_folder_name)))
-        else:
-            folds = get_npy_folds(os.path.join(root, 'folds_train.npy'))
+        f = 'f04a.csv' if 'f04a' in config.folder else 'fma.csv'
+        folds = get_csv_folds(os.path.join('..', f), os.listdir(os.path.join(root, image_folder_name)))
     else:
         folds = [([], list(range(len(c_ds)))) for i in range(5)]
 

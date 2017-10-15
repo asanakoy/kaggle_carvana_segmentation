@@ -12,7 +12,7 @@ from tensorboardX import SummaryWriter
 
 from dataset.neural_dataset import TrainDataset, ValDataset
 from torch.utils.data.dataloader import DataLoader as PytorchDataLoader
-from utils import get_config, get_csv_folds, get_npy_folds
+from utils import get_config, get_csv_folds
 from dataset.carvana_dataset import CarvanaDataset
 from dataset.h5like_interface import H5LikeFileInterface
 from transforms import augment_color
@@ -235,10 +235,8 @@ def train_config(config_path):
                                             image_folder_name=image_folder_name,
                                             apply_clahe=config.use_clahe))
 
-    if 'f04a' in config.folder:
-        folds = get_csv_folds(os.path.join(root, 'folds_csv.csv'), os.listdir(os.path.join(root, image_folder_name)))
-    else:
-        folds = get_npy_folds(os.path.join(root, 'folds_train.npy'))
+    f = 'f04a.csv' if 'f04a' in config.folder else 'fma.csv'
+    folds = get_csv_folds(os.path.join('..', f), os.listdir(os.path.join(root, image_folder_name)))
     num_workers = 0 if os.name == 'nt' else 5
 
     skip_folds = [i for i in range(5) if config.fold is not None and i != int(config.fold)]
