@@ -13,7 +13,9 @@ pushd albu
 bash predict.sh
 popd
 
-# TODO: ternaus
+pushd ternaus
+bash predict.sh
+popd
 
 echo "Generate final ensemble"
 python generate_sub_final_ensemble.py -j=4

@@ -13,5 +13,8 @@ pushd albu
 bash train.sh
 popd
 
-# TODO: ternaus
+pushd ternaus
+bash train.sh
+popd
+
 source deactivate
