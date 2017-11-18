@@ -6,7 +6,7 @@ To achieve best results we use an ensemble of several differnet networks (Linkne
 
 Our team:
 - Artsiom Sanakoyeu ([linkedin](https://www.linkedin.com/in/sanakoev/))
-- Alexander Buslaev 
+- Alexander Buslaev ([linkedin](https://www.linkedin.com/in/al-buslaev/))
 - Vladimir Iglovikov ([linkedin](https://www.linkedin.com/in/iglovikov/))
 
 # Requirements
