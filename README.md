@@ -4,6 +4,11 @@ Code for the 1st place solution in Carvana Image Masking Challenge on car segmen
 We used CNNs to segment a car in the image.
 To achieve best results we use an ensemble of several differnet networks (Linknet, Unet-like CNN with custom encoder, several types of Unet-like CNNs with VGG11 encoder).
 
+Our team:
+- Artsiom Sanakoyeu ([linkedin](https://www.linkedin.com/in/sanakoev/))
+- Alexander Buslaev
+- Vladimir Iglovikov
+
 # Requirements
 To train final models you will need the following:
 
