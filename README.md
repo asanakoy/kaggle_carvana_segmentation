@@ -6,8 +6,8 @@ To achieve best results we use an ensemble of several differnet networks (Linkne
 
 Our team:
 - Artsiom Sanakoyeu ([linkedin](https://www.linkedin.com/in/sanakoev/))
-- Alexander Buslaev
-- Vladimir Iglovikov
+- Alexander Buslaev 
+- Vladimir Iglovikov ([linkedin](https://www.linkedin.com/in/iglovikov/))
 
 # Requirements
 To train final models you will need the following:
