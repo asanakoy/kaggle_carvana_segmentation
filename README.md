@@ -1,5 +1,5 @@
 # Kaggle Carvana Image Masking Challenge
-Code for the 1st place solution in Carvana Image Masking Challenge on car segmentaion.
+Code for the 1st place solution in [Carvana Image Masking Challenge on car segmentaion](https://www.kaggle.com/c/carvana-image-masking-challenge/leaderboard).
 
 We used CNNs to segment a car in the image.
 To achieve best results we use an ensemble of several differnet networks (Linknet, Unet-like CNN with custom encoder, several types of Unet-like CNNs with VGG11 encoder).
