@@ -134,11 +134,11 @@ class Rotate:
 
             height, width = img.shape[0:2]
             mat = cv2.getRotationMatrix2D((width/2, height/2), angle, 1.0)
-            img = cv2.warpAffine(img, mat, (height, width),
+            img = cv2.warpAffine(img, mat, (width, height),
                                  flags=cv2.INTER_LINEAR,
                                  borderMode=cv2.BORDER_REFLECT_101)
             if mask is not None:
-                mask = cv2.warpAffine(mask, mat, (height, width),
+                mask = cv2.warpAffine(mask, mat, (width, height),
                                       flags=cv2.INTER_LINEAR,
                                       borderMode=cv2.BORDER_REFLECT_101)
 
