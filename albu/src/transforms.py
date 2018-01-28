@@ -250,8 +250,8 @@ class CenterCrop:
 
     def __call__(self, img, mask=None):
         h, w, c = img.shape
-        dx = (h-self.height)//2
-        dy = (w-self.width)//2
+        dy = (h - self.height) // 2
+        dx = (w - self.width) // 2
 
         y1 = dy
         y2 = y1 + self.height
