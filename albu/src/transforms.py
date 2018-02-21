@@ -101,25 +101,14 @@ class Transpose:
 
 
 class RandomRotate90:
-    def __init__(self, prob=.5):
+    def __init__(self, prob=0.5):
         self.prob = prob
 
-    def __call__(self, img, mask=None):
-        """
-        http://stackoverflow.com/questions/16265673/rotate-image-by-90-180-or-270-degrees
-        """
+    def __call__(self, img, mask=None):        
         if random.random() < self.prob:
-            angle = random.randint(1, 3)*90
-            if angle == 90:
-                img, mask = Transpose(1.)(img, mask)
-                img, mask = HorizontalFlip(1.)(img, mask)
-            elif angle == 180:
-                img = cv2.flip(img, -1)
-                if mask is not None:
-                    mask = cv2.flip(mask, -1)
-            elif angle == 270:
-                img, mask = Transpose(1.)(img, mask)
-                img, mask = VerticalFlip(1.)(img, mask)
+            factor = random.randint(0, 4)
+            img = np.rot90(img, factor)
+            mask = np.rot90(mask, factor)            
             return img, mask
 
 
