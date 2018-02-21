@@ -109,7 +109,7 @@ class RandomRotate90:
             factor = random.randint(0, 4)
             img = np.rot90(img, factor)
             mask = np.rot90(mask, factor)            
-            return img, mask
+        return img, mask
 
 
 class Rotate:
