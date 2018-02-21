@@ -110,7 +110,7 @@ class RandomRotate90:
             img = np.rot90(img, factor)            
             if mask is not None:
                 mask = np.rot90(mask, factor)            
-        return img, mask
+        return img.copy(), mask.copy() # throws error without .copy()
 
 
 class Rotate:
