@@ -107,8 +107,9 @@ class RandomRotate90:
     def __call__(self, img, mask=None):        
         if random.random() < self.prob:
             factor = random.randint(0, 4)
-            img = np.rot90(img, factor)
-            mask = np.rot90(mask, factor)            
+            img = np.rot90(img, factor)            
+            if mask is not None:
+                mask = np.rot90(mask, factor)            
         return img, mask
 
 
