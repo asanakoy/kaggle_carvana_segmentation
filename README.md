@@ -9,6 +9,8 @@ Our team:
 - Alexander Buslaev ([linkedin](https://www.linkedin.com/in/al-buslaev/))
 - Vladimir Iglovikov ([linkedin](https://www.linkedin.com/in/iglovikov/))
 
+Blogpost explaining solution: http://blog.kaggle.com/2017/12/22/carvana-image-masking-first-place-interview/
+
 # Requirements
 To train final models you will need the following:
 
