@@ -59,6 +59,6 @@ File `ens_scratch2(1)_v1-final(1)_al27(1)_te27(1).csv.gz` that contains final pr
 **Required time:** *It may require quite a long time depending on hardware used. Takes from 4 to 8 hours per model to generate predictions on a single Titan X Pascal GPU. Total time needed is about 320 hours, which is ~13 days on a single Titan X Pascal. The required time can be reduced if you use more GPUs in parallel.*
 
 # Remarks
-Please, keep in mind that this isn't a production ready code but a very specific solution for the particular competition created in short time frame and with a lot of other constrains (limited training data, scarce computing resources and a small number of attents to check for improvements). 
+Please, keep in mind that this isn't a production ready code but a very specific solution for the particular competition created in short time frame and with a lot of other constrains (limited training data, scarce computing resources and a small number of attempts to check for improvements). 
 
 Also, inherent stochasticity of neural networks training on many different levels (random initialization of weights, random augmentations and so on) makes it impossible to reproduce exact submission from scratch.
