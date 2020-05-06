@@ -1,4 +1,6 @@
 # Kaggle Carvana Image Masking Challenge
+![carvana header image](carvana_header.jpg "Carvana")
+
 Code for the 1st place solution in [Carvana Image Masking Challenge on car segmentaion](https://www.kaggle.com/c/carvana-image-masking-challenge/leaderboard).
 
 We used CNNs to segment a car in the image.
