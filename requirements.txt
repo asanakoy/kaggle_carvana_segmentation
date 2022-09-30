@@ -6,7 +6,7 @@ scipy
 tqdm==4.8.4
 pathlib2==2.3.0
 tqdm==4.8.4
-joblib==0.7.1
+joblib==1.2.0
 pathlib2==2.3.0
 Pillow==4.3.0
 scikit_learn==0.19.0
